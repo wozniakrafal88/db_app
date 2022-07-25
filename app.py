@@ -35,7 +35,7 @@ db = scoped_session(sessionmaker(bind=engine))
 
 
 
-@app.route('/')
+@app.route('/db')
 def index():
 
         books = db.execute('SELECT * FROM books;')
@@ -44,7 +44,7 @@ def index():
 
 
 
-@app.route('/create/', methods=('GET', 'POST'))
+@app.route('/db/create/', methods=('GET', 'POST'))
 def create():
     if request.method == 'POST':
         title = request.form['title']
@@ -60,7 +60,7 @@ def create():
 
     return render_template('create.html')
 
-@app.route("/bookDelete/<int:bookid>")
+@app.route("/db/bookDelete/<int:bookid>")
 def bookDelete(bookid):
 
     #create delete query as string
