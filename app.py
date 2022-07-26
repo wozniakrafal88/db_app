@@ -70,3 +70,9 @@ def bookDelete(bookid):
     #commit to database
     db.commit()
     return  render_template('delete.html')
+
+@app.route('/db/API_number_of_books/')
+def API_number_of_books():
+    result=db.execute('SELECT count(*) FROM books;').scalar()
+    number_of_books=str(result)
+    return jsonify(number_of_books=number_of_books)
