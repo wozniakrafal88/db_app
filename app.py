@@ -13,8 +13,6 @@ ENDPOINT=os.environ['RDSHOST']
 DBNAME=os.environ['DB_DBNAME']
 PORT=os.environ['DB_PORT']
 USER=os.environ['DB_USERNAME']
-#password=os.environ['DB_PASSWORD']
-PGPASSWORD=os.environ['PGPASSWORD']
 REGION=os.environ['AWS_REGION']
 
 #session = boto3.Session()
