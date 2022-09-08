@@ -25,7 +25,7 @@ client = boto3.client('rds', config=my_config)
 
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USER, Region=REGION)
 
-PASSWD= urllib.quote_plus(token)
+PASSWD= urllib.parse.quote_plus(token)
 
 url = "postgresql://"+USER+":"+PASSWD+"@"+ENDPOINT+"/"+DBNAME+"?sslmode=require"
 
