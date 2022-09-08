@@ -2,6 +2,7 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from flask import Flask, render_template, request, url_for, redirect, jsonify
+from botocore.config import Config
 import psycopg2
 import sys
 import boto3
@@ -15,8 +16,12 @@ PORT=os.environ['DB_PORT']
 USER=os.environ['DB_USERNAME']
 REGION=os.environ['AWS_REGION']
 
+my_config = Config(
+    region_name = 'eu-west-1'
+)
+
 #session = boto3.Session()
-client = boto3.client('rds')
+client = boto3.client('rds', config=my_config)
 
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USER, Region=REGION)
 
