@@ -20,7 +20,6 @@ my_config = Config(
     region_name = 'eu-west-1'
 )
 
-#session = boto3.Session()
 client = boto3.client('rds', config=my_config)
 
 token = client.generate_db_auth_token(DBHostname=ENDPOINT, Port=PORT, DBUsername=USER, Region=REGION)
@@ -29,14 +28,9 @@ PASSWD= urllib.parse.quote_plus(token)
 
 url = "postgresql://"+USER+":"+PASSWD+"@"+ENDPOINT+"/"+DBNAME+"?sslmode=require"
 
-#url = "postgresql://"+USER+":password@"+ENDPOINT+":"+PORT+"/"+DBNAME
-#url = "postgresql://"+user+"@"+host+"/"+dbname
-
 engine = create_engine(url)
 
 db = scoped_session(sessionmaker(bind=engine))
-
-
 
 @app.route('/db')
 def index():
@@ -44,8 +38,6 @@ def index():
         books = db.execute('SELECT * FROM books;')
 
         return render_template('index.html', books=books)
-
-
 
 @app.route('/db/create/', methods=('GET', 'POST'))
 def create():
