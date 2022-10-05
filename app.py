@@ -71,3 +71,7 @@ def API_number_of_books():
     result=db.execute('SELECT count(*) FROM books;').scalar()
     number_of_books=str(result)
     return jsonify(number_of_books=number_of_books)
+
+@app.route("/db/about/")
+def about():
+    return  render_template('about.html')
